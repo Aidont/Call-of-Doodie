@@ -1,0 +1,28 @@
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+dependencies {
+  api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  api "org.scala-lang:scala3-library_3:$scalaVersion"
+
+  if(enableGraalNative == 'true') {
+    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
+  }
+}
+
+sourceSets {
+  main {
+    scala {
+      srcDirs = ['src/main/scala']
+    }
+    java {
+      srcDirs = []  // No Java source directories
+    }
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.compilerArgs << '-proc:none'
+  exclude '**/*.scala'
+}
