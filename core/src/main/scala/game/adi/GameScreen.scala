@@ -24,6 +24,7 @@ class GameScreen(game: CallOfDoodie) extends Screen {
         player.initSprite(playerImg)
         boi = new Boi()
         boi.initSprite(new Texture("boi.jpeg"))
+        boi.turnToPlayer(player)
 
         boi.setPosition(200, 500)
         player.setPosition(200, 200)
