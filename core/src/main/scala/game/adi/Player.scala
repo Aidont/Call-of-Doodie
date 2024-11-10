@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.{MathUtils, Vector2}
 class Player extends GameEntity(0.1) {
     private val speed = 400
     private val mousePos = new Vector2()
-    
+
     override def act(v: Float): Unit = {
         super.act(v)
 
@@ -35,22 +35,22 @@ class Player extends GameEntity(0.1) {
 
         dir match {
             case "w" =>
-                dx = -MathUtils.sin(rotation) * speed * delta
-                dy = MathUtils.cos(rotation) * speed * delta
+//                dx = -speed * delta
+                dy = speed * delta
             case "s" =>
-                dx = MathUtils.sin(rotation) * speed * delta
-                dy = -MathUtils.cos(rotation) * speed * delta
+//                dx = speed * delta
+                dy = -speed * delta
             case "a" =>
-                dx = -MathUtils.cos(rotation) * speed * delta
-                dy = -MathUtils.sin(rotation) * speed * delta
+                dx = -speed * delta
+//                dy = -speed * delta
             case "d" =>
-                dx = MathUtils.cos(rotation) * speed * delta
-                dy = MathUtils.sin(rotation) * speed * delta
+                dx = speed * delta
+//                dy = speed * delta
         }
 
 
-        val newX = getX + dx
-        val newY = getY + dy
+        val newX = speed*delta
+        val newY = speed*delta
         moveBy(dx, dy)
     }
 

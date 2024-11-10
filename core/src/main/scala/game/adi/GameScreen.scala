@@ -1,7 +1,7 @@
 package game.adi
 
 import com.badlogic.gdx.Screen
-import com.badlogic.gdx.graphics.{Color, Texture}
+import com.badlogic.gdx.graphics.{Color, OrthographicCamera, Texture}
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.ScreenUtils
@@ -13,6 +13,7 @@ class GameScreen(game: CallOfDoodie) extends Screen {
     var player: Player = _
     var stage: Stage = _
     var boi: Boi =_
+    var boi2:Boi = _    
 
 
 
@@ -25,11 +26,18 @@ class GameScreen(game: CallOfDoodie) extends Screen {
         boi = new Boi()
         boi.initSprite(new Texture("boi.jpeg"))
         boi.turnToPlayer(player)
+        boi2 = new Boi()
+        boi2.initSprite(new Texture("boi.jpeg"))
+        boi2.turnToPlayer(player)
 
-        boi.setPosition(200, 500)
+        boi.setCenter(200, 500)
+        boi2.setCenter(500, 500)
+        boi.clamp(100, 100)
+        boi2.clamp(200, 200)
         player.setPosition(200, 200)
         stage.addActor(player)
         stage.addActor(boi)
+        stage.addActor(boi2)
         Gdx.input.setInputProcessor(stage)
     }
 
