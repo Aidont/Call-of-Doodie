@@ -13,32 +13,40 @@ class GameScreen(game: CallOfDoodie) extends Screen {
     var player: Player = _
     var stage: Stage = _
     var boi: Boi =_
-    var boi2:Boi = _    
+    var boi2:Boi =_
+    private var camera: OrthographicCamera = _
 
 
 
 
     override def show(): Unit = {
         stage = new Stage(new ScreenViewport())
+        camera = stage.getCamera.asInstanceOf[OrthographicCamera]
+
         playerImg = new Texture("player.png")
         player = new Player()
         player.initSprite(playerImg)
-        boi = new Boi()
-        boi.initSprite(new Texture("boi.jpeg"))
-        boi.turnToPlayer(player)
-        boi2 = new Boi()
-        boi2.initSprite(new Texture("boi.jpeg"))
-        boi2.turnToPlayer(player)
-
-        boi.setCenter(200, 500)
-        boi2.setCenter(500, 500)
-        boi.clamp(100, 100)
-        boi2.clamp(200, 200)
         player.setPosition(200, 200)
+        player.setCam(camera)
+
+        boi = new Boi()
+        boi.initSprite(new Texture("boi.png"))
+        boi.turnToPlayer(player)
+        boi.setCenter(200, 500)
+        boi.clamp(100, 100)
+
+        boi2 = new Boi()
+        boi2.initSprite(new Texture("boi.png"))
+        boi2.turnToPlayer(player)
+        boi2.setCenter(500, 500)
+        boi2.clamp(200, 200)
+
+
         stage.addActor(player)
         stage.addActor(boi)
         stage.addActor(boi2)
         Gdx.input.setInputProcessor(stage)
+
     }
 
 
@@ -46,10 +54,16 @@ class GameScreen(game: CallOfDoodie) extends Screen {
         ScreenUtils.clear(Color.BLACK)
         stage.act()
         stage.draw()
+        camera.update()
+    }
+    private def updateCameraPosition():Unit ={
+        camera.position.x = player.getX
+        camera.position.y = player.getY
     }
 
     override def render(v: Float): Unit = {
         draw()
+        updateCameraPosition()
     }
 
 

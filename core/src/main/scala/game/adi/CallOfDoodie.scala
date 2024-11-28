@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 class CallOfDoodie extends Game{
     var batch:SpriteBatch = null
-    var camera: OrthographicCamera = _
 
     override def create(): Unit = {
         batch = new SpriteBatch()
